@@ -18,5 +18,5 @@ end
 # Make category field required for issues when the module is enabled
 require 'dispatcher'
 Dispatcher.to_prepare :chiliproject_categories_required_patches do
-  Issue.send(:validates_presence_of, :category, :if => Proc.new { |i| i.project.module_enabled? :categories_required })
+  Issue.send(:validates_presence_of, :category, :if => Proc.new { |i| i.project.module_enabled?(:categories_required) && !i.project.issue_categories.empty? })
 end
